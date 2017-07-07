@@ -12,7 +12,7 @@ title_separator          : "-"
 name                     : "Julien Roger"
 description              : "Analyses politiques"
 url                      : "https://jujulroger.github.io"
-baseurl                  : #"/political-landscape"
+baseurl                  : "/political-landscape"
 repository               : "jujulroger/political-landscape"
 teaser                   : "/assets/images/default.png"
 breadcrumbs              : true
