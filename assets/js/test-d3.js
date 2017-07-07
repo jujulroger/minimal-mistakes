@@ -16,7 +16,7 @@ var svg = d3.select('#example').append("svg")
 
 var deps = svg.append("g");
 
-d3.json('/assets/france-geojson-master/departements.geojson', function(req, geojson) {
+d3.json(baseurl + '/assets/france-geojson-master/departements.geojson', function(req, geojson) {
     deps.selectAll("path")
         .data(geojson.features)
         .enter()
