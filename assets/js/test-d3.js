@@ -2,10 +2,9 @@
 
 var width = 700, height = 550;
 
-var map = baseurl + '/assets/maps/france-geojson/departements.geojson'
-
-var column_header = "% Voix/Ins_Macron"
-
+var map = baseurl + '/assets/maps/france-geojson/france-circonscriptions-legislatives-2012.json'
+var data = baseurl + "/assets/data/Presidentielle_2017_Resultats_Tour_2_Cantons.csv"
+var column_header = "% Blancs/Ins"
 
 //projections data
 var center = [2.454071, 46.279229];
@@ -44,11 +43,11 @@ d3.json(map, function(req, geojson) {
         .data(geojson.features)
         .enter()
         .append("path")
-        .attr('id', function(d) {return "d" + d.properties.code;})
+        .attr('id', function(d) {return "d" + d.properties.ID;})
         .attr("d", path);
 
     //note: needs to be inside d3.json to load after the map
-    d3.csv(baseurl + "/assets/data/Presidentielle_2017_Resultats_Tour_2_Departement.csv", function(csv) {
+    d3.csv(data, function(csv) {
 
       //create quantile scale
       var quantile = d3.scaleQuantile()
@@ -82,7 +81,8 @@ d3.json(map, function(req, geojson) {
 
       //color map according to scale and add tooltip
       csv.forEach(function(e,i) {
-        d3.select("#d" + e["Code du département"])
+        var code = e["Code du département"] + e["Code du canton"];
+        d3.select("#d" + code)
 
             //add colors
             .attr("class", function(d) { return "department q" + quantile(+e[column_header]) + "-9"; })
