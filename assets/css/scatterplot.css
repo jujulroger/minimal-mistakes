@@ -1,0 +1,77 @@
+svg .scatter-background {
+    fill: seashell;
+    pointer-events: none;
+  }
+
+svg .scatter-point {
+    fill: steelblue;
+    fill-opacity:0.6;
+  }
+
+/* applied to scatter-points when highlighted */
+svg .scatter-point-highlight {
+    fill:orange;
+    fill-opacity:1;
+    stroke:green;
+  }
+
+svg .reg-line {
+      stroke:dodgerblue;
+  }
+
+svg .axis path, .axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+  }
+
+svg .axis text {
+  /* should be same as .grid .tick text */
+    font-family: sans-serif;
+    font-size: 20px;
+  }
+
+svg .axis-name {
+    font-family: sans-serif;
+    font-size: 15px;
+  }
+
+/* specify color, opacity of grid */
+svg .grid .tick {
+      stroke: lightgrey;
+      opacity: 0.7;
+  }
+
+svg .grid .tick text {
+    stroke:none;
+    fill:black;
+
+  /* should be same as .axis text */
+    font-family: sans-serif;
+    font-size: 20px;
+  }
+
+svg .grid path {
+      stroke-width: 0;
+      shape-rendering: crispEdges;
+  }
+
+.tooltip {
+    position: absolute;
+    text-align: center;
+    padding: 3px;
+    font: 20px sans-serif;
+    background: powderblue;
+    border: 0px;
+    border-radius: 4px;
+    pointer-events: none;
+  }
+  .box {
+    text-align: center;
+    padding: 3px;
+    font: 20px sans-serif;
+    background: powderblue;
+    border: 0px;
+    border-radius: 4px;
+    pointer-events: none;
+  }

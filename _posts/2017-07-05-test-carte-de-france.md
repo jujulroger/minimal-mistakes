@@ -1,27 +1,26 @@
 ---
 layout: single
-title:  "test !!"
+title:  "Test Carte de France"
 header:
   image: /assets/images/default.png
 date:   2017-07-05 12:22:43 +0200
 categories: politique
-tags: test jekyll
+tags: test carte france
 ---
 
 <link rel="stylesheet" href="{{site.baseurl}}/assets/css/colorbrewer.css">
 <link rel="stylesheet" href="{{site.baseurl}}/assets/css/tooltip.css">
 
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
-
+test carte de France
 
 <div id="example"></div>
 
-blablablatest
+Pourcentage de votes blancs parmi les inscrits
 
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
  var baseurl = '{{site.baseurl}}';
 </script>
-<script src="{{site.baseurl}}/assets/js/test-d3.js">
+<script src="{{site.baseurl}}/assets/js/carte-france.js">
 </script>
