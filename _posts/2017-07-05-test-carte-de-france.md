@@ -11,12 +11,11 @@ tags: test carte france
 <link rel="stylesheet" href="{{site.baseurl}}/assets/css/colorbrewer.css">
 <link rel="stylesheet" href="{{site.baseurl}}/assets/css/tooltip.css">
 
-test carte de France
+Cette carte représente l'écart entre le pourcentage de vote pour Emmanuel Macron et l'estimation faite à partir du taux de chômage.
 
 <div id="example"></div>
 
-Pourcentage de votes blancs parmi les inscrits
-
+Cette carte représente l'écart entre le pourcentage de vote pour Emmanuel Macron et l'estimation faite à partir du taux de chômage.
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>

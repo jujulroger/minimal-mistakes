@@ -24,7 +24,7 @@ Script is mostly generic, except for tooltip content, see var tooltipHtml
   //choose columns from csv
 
   var xVar = "2017_1";
-  var yVar = "% Voix/Ins_1";
+  var yVar = "% Contestataires";
 
   //axes names
 
@@ -150,6 +150,7 @@ Script is mostly generic, except for tooltip content, see var tooltipHtml
 
   var regLineSlope;
   var regLineIntercept;
+  var r2;
   function regLine(x) {return regLineSlope * x + regLineIntercept ;};
   function regLineInverse(y){return (1/regLineSlope)*(y-regLineIntercept);};
 
@@ -372,6 +373,7 @@ Script is mostly generic, except for tooltip content, see var tooltipHtml
       lr = linearRegression(yData, xData);
       regLineSlope = +lr["slope"];
       regLineIntercept = +lr["intercept"];
+      r2 = +lr["r2"];
 
       //create regression line, attached to graph
       //compute x-coord intersection with graph area TODO: other method?
