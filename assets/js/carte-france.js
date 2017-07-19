@@ -57,9 +57,13 @@ d3.json(map, function(req, geojson) {
           .domain([d3.min(csv, function(e) { return +e[column_header]; }), - d3.min(csv, function(e) { return +e[column_header]; })])
           .range(d3.range(11));
 
+      var hpad = 0.07 * width;
+      var vpad;
+      if (width > 600) { vpad = 0.3 * width;} else { vpad = (0.3 - 0.45 * (1- width / 600)) * width;}
+
       //create legend element to the side
       var legend = svg.append('g')
-          .attr('transform', 'translate(' + (width - 75) + ',' + (height / 3) + ')')
+          .attr('transform', 'translate(' + (width - hpad - 25) + ',' + vpad + ')')
           .attr('id', 'legend');
 
       //add rectangles to legend
@@ -79,7 +83,7 @@ d3.json(map, function(req, geojson) {
 
       //add axis to legend
       var legendAxis = svg.append("g")
-          .attr('transform', 'translate(' + (width - 50) + ',' + (height / 3) + ')')
+          .attr('transform', 'translate(' + (width - hpad) + ',' + vpad + ')')
           .call(d3.axisRight(legendScale).ticks(8));
 
       //color map according to scale and add tooltip
