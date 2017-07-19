@@ -21,5 +21,7 @@ Cette carte représente l'écart entre le pourcentage de vote pour Emmanuel Macr
 <script>
  var baseurl = '{{site.baseurl}}';
 </script>
+<script src="{{site.baseurl}}/assets/js/jquery-1.12.4.min.js">
+</script>
 <script src="{{site.baseurl}}/assets/js/carte-france.js">
 </script>

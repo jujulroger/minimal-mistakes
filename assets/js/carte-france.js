@@ -1,6 +1,7 @@
 //uses tooltip.css and colorbrew.css
 
-var width = 650, height = 650;
+var width = $( ".page__inner-wrap" ).width();
+var height = width;
 
 var map = baseurl + '/assets/maps/france-geojson/departements.geojson'
 var data = baseurl + "/assets/data/chomage_2016_2017.csv"
