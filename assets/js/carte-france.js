@@ -1,6 +1,6 @@
 //uses tooltip.css and colorbrew.css
 
-var width = 500, height = 500;
+var width = 650, height = 650;
 
 var map = baseurl + '/assets/maps/france-geojson/departements.geojson'
 var data = baseurl + "/assets/data/chomage_2016_2017.csv"
@@ -45,6 +45,8 @@ d3.json(map, function(req, geojson) {
         .append("path")
         .attr('id', function(d) {return "d" + d.properties.code;})
         .attr("d", path);
+        //.attr("stroke-width", "O.25px")
+        //.attr("stroke", "white");
 
     //note: needs to be inside d3.json to load after the map
     d3.csv(data, function(csv) {
