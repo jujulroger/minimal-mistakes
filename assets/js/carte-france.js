@@ -101,8 +101,8 @@ d3.json(map, function(req, geojson) {
                     .style("opacity", .9);
 
                 //tooltip html
-                div.html("<b>Département : </b>" + e["nom"] + "<br>"
-                      + "<b>" + column_header + ": </b>" + e[column_header] + "<br>"
+                div.html(e["nom"] + "<br>"
+                      + "<b> Écart : </b>" + Number(e[column_header]).toFixed(1) + "<br>"
                       )
                     .style("left", (d3.event.pageX + 30) + "px")
                     .style("top", (d3.event.pageY - 30) + "px");
