@@ -134,9 +134,20 @@ function loadMap(options) {
                   //tooltip html
                   div.html(e["nom"] + "<br>"
                         + "<b>" + tooltipName + " : </b>" + Number(e[columnHeader]).toFixed(1) + "<br>"
-                        )
-                      .style("left", (d3.event.pageX + 30) + "px")
-                      .style("top", (d3.event.pageY - 30) + "px");
+                      );
+
+                  //tooltip position: below, shifted left if too close to window border
+                  var mouseX = d3.event.pageX;
+                  var mouseY = d3.event.pageY;
+
+                  if (mouseX < $(window).width() - 50) {
+                      div.style("left", (mouseX - 30) + "px")
+                         .style("top", (mouseY + 30) + "px");
+                    }
+                  else {
+                    div.style("left", (mouseX - 70) + "px")
+                       .style("top", (mouseY + 30) + "px");
+                    }
               })
               .on("mouseout", function(d) {
                   div.transition()
