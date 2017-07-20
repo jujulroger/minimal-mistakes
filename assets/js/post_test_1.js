@@ -3,6 +3,7 @@ var Id2 = "example-2";
 var Id3 = "example-3";
 
 var width = $( ".page__inner-wrap" ).width();
+var width2 = Math.max(width / 2 - 25, 300);
 var height = width;
 
 var map = baseurl + '/assets/maps/france-geojson/departements.geojson'
@@ -11,8 +12,8 @@ var columnHeader = "Ecart_Macron"
 
 var options1 = {
         Id: Id1,
-        width: 350,
-        height: 350,
+        width: width2,
+        height: width2,
         map: map,
         data: data,
         columnHeader: "2017_1",
@@ -23,8 +24,8 @@ var options1 = {
 
 var options2 = {
         Id: Id2,
-        width: 350,
-        height: 350,
+        width: width2,
+        height: width2,
         map: map,
         data: data,
         columnHeader: "% Voix/Exp_2",

@@ -16,7 +16,7 @@ function loadMap(options) {
 
   var divId = "#" + Id;
 
-  //projections data.
+  //projections data
   var center = [2.454071, 46.279229];
   var scale = 5 * width;
   var translation = [width / 2, height / 2];
@@ -74,6 +74,7 @@ function loadMap(options) {
           max = d3.max(csv, function(e) { return +e[columnHeader]; });
           }
 
+        //need to be reversed for color scale. TODO: does it break anything else ?
         var domain = [max, min];
 
         //create quantile scale
