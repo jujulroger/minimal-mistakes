@@ -17,7 +17,10 @@ var options1 = {
         map: map,
         data: data,
         columnHeader: "2017_1",
+        tooltipName: "Chômage",
         colorbrewerCss: "Reds",
+        strokeWidth: "0.25px",
+        strokeColor: "grey",
         centeredRange: false,
         quantiles: 9
     };
@@ -29,7 +32,10 @@ var options2 = {
         map: map,
         data: data,
         columnHeader: "% Voix/Exp_2",
+        tooltipName: "Vote FN",
         colorbrewerCss: "Greys",
+        strokeWidth: "0.25px",
+        strokeColor: "grey",
         centeredRange: false,
         quantiles: 9
     };
@@ -41,7 +47,10 @@ var options3 = {
         map: map,
         data: data,
         columnHeader: "Ecart_Macron",
-        colorbrewerCss: "RdGy",
+        tooltipName: "Écart",
+        colorbrewerCss: "PuOr",
+        strokeWidth: "0.25px",
+        strokeColor: "grey",
         centeredRange: true,
         quantiles: 11
     };
