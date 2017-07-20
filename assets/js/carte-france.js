@@ -70,7 +70,7 @@ function loadMap(options) {
               var dataMin = Math.abs(d3.min(csv, function(e) { return +e[columnHeader]; }));
               var dataMax = Math.abs(d3.max(csv, function(e) { return +e[columnHeader]; }));
               min = - Math.max(dataMin, dataMax);
-              max = Math.max(dataMin, dataMax);
+              max = Math.max(dataMin, dataMax); 
             }
         else {
           min = d3.min(csv, function(e) { return +e[columnHeader]; });
