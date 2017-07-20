@@ -88,7 +88,7 @@ function loadMap(options) {
         //horizontal and vertical padding for legend. TODO: Too much fudging
         var hpad = 0.07 * width;
         var vpad;
-        if (width > 600) { vpad = 0.3 * width;} else { vpad = (0.3 - 0.45 * (1- width / 600)) * width;}
+        if (width > 600) { vpad = 0.3 * width;} else { vpad = (0.3 - 0.5 * (1- width / 600)) * width;}
 
         //create legend element to the side
         var legend = svg.append('g')
