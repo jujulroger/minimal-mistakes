@@ -12,18 +12,18 @@ tags: test carte france
 <link rel="stylesheet" href="{{site.baseurl}}/assets/css/tooltip.css">
 
 Le but est de comparer le taux de chômage par département et le vote Front National au deuxième tour de l'élection présidentielle de 2017.
-<figure style="display: inline-block;">
-  <figcaption style ="text-align: center;">Taux de chômage au 1er trimestre 2017</figcaption>
+<figure>
+  <figcaption>Taux de chômage au 1er trimestre 2017</figcaption>
   <div  id = "example"></div>
 </figure>
-<figure style="display: inline-block;">
-  <figcaption style ="text-align: center;">Vote Front National 2è tour présidentielles 2017</figcaption>
+<figure>
+  <figcaption>Vote Front National 2è tour présidentielles 2017</figcaption>
   <div id  = "example-2"></div>
 </figure>
 
 Cette carte représente l'écart entre le vote pour le FN et celui prédit par le taux de chômage.
 <figure style="display: inline-block;">
-  <figcaption style ="text-align: center;">Écart entre vote Front National et taux de chômage</figcaption>
+  <figcaption>Écart entre vote Front National et taux de chômage</figcaption>
   <div id  = "example-3"></div>
 </figure>
 
