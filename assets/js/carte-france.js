@@ -44,7 +44,7 @@ function loadMap(options) {
   var deps = svg.append("g");
 
   //create tooltip element
-  var div = d3.select(divId).append("div")
+  var tooltipDiv = d3.select(divId).append("div")
       .attr("class", "tooltip")
       .style("opacity", 0);
 
@@ -120,46 +120,18 @@ function loadMap(options) {
         //color map according to scale and add tooltip
         csv.forEach(function(e,i) {
           var code = e["code"];
-          d3.select("#d" + code + "-" + Id)
+          var element = d3.select("#d" + code + "-" + Id);
 
               //add colors
-              .attr("class", function(d) { return "department q" + quantile(+e[columnHeader]) + "-" + quantiles; })
+              element.attr("class", function(d) { return "department q" + quantile(+e[columnHeader]) + "-" + quantiles; });
+
+              //create tooltip html
+              tooltipHtml = e["nom"] + "<br>"
+                    + "<b>" + tooltipName + " : </b>" + Number(e[columnHeader]).toFixed(1) + " %<br>"
 
               //add tooltip
-              .on("mouseover", function(d) {
-                  div.transition()
-                      .duration(50)
-                      .style("opacity", .9);
-
-                  //tooltip html
-                  div.html(e["nom"] + "<br>"
-                        + "<b>" + tooltipName + " : </b>" + Number(e[columnHeader]).toFixed(1) + "<br>"
-                      );
-
-                  //tooltip position: below, shifted left if too close to window border
-                  var mouseX = d3.event.pageX;
-                  var mouseY = d3.event.pageY;
-
-                  if (mouseX < $(window).width() - 50) {
-                      div.style("left", (mouseX - 30) + "px")
-                         .style("top", (mouseY + 30) + "px");
-                    }
-                  else {
-                    div.style("left", (mouseX - 70) + "px")
-                       .style("top", (mouseY + 30) + "px");
-                    }
-              })
-              .on("mouseout", function(d) {
-                  div.transition()
-                      .duration(500)
-                      .style("opacity", 0);
-                  div.html("")
-                      .style("left", "0px")
-                      .style("top", "0px");
-              });
-
-      });
-
+              createTooltip(element, tooltipDiv, tooltipHtml);
+        });
       });
   });
 }

@@ -30,5 +30,8 @@ Cette carte représente l'écart entre le vote pour le FN et celui prédit par l
 </script>
 <script src="{{site.baseurl}}/assets/js/carte-france.js">
 </script>
+</script>
+<script src="{{site.baseurl}}/assets/js/tooltip.js">
+</script>
 <script src="{{site.baseurl}}/assets/js/post_test_1.js">
 </script>
