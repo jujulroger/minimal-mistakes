@@ -127,7 +127,7 @@ function loadMap(options) {
 
               //create tooltip html
               tooltipHtml = e["nom"] + "<br>"
-                    + "<b>" + tooltipName + " : </b>" + Number(e[columnHeader]).toFixed(1) + " %<br>"
+                    + "<b>" + tooltipName + " : </b>" + Number(e[columnHeader]).toFixed(1) + "&nbsp;%<br>"
 
               //add tooltip
               createTooltip(element, tooltipDiv, tooltipHtml);

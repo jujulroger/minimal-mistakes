@@ -3,8 +3,9 @@ var Id2 = "example-2";
 var Id3 = "example-3";
 
 var width = $( ".page__inner-wrap" ).width();
+var height = 0.9 * width;
 var width2 = Math.max(width / 2 - 25, 300);
-var height = width;
+var height2 = 0.9 * width2;
 
 var map = baseurl + '/assets/maps/france-geojson/departements.geojson'
 var data = baseurl + "/assets/data/chomage_2016_2017.csv"
@@ -13,7 +14,7 @@ var columnHeader = "Ecart_Macron"
 var options1 = {
         Id: Id1,
         width: width2,
-        height: width2,
+        height: height2,
         map: map,
         data: data,
         columnHeader: "2017_1",
@@ -28,7 +29,7 @@ var options1 = {
 var options2 = {
         Id: Id2,
         width: width2,
-        height: width2,
+        height: height2,
         map: map,
         data: data,
         columnHeader: "% Voix/Exp_2",
