@@ -1,5 +1,5 @@
 svg .scatter-background {
-    fill: seashell;
+    fill: lavenderblush;
     pointer-events: none;
   }
 
@@ -28,18 +28,18 @@ svg .axis path, .axis line {
 svg .axis text {
   /* should be same as .grid .tick text */
     font-family: sans-serif;
-    font-size: 20px;
+    font-size: 1em;
   }
 
 svg .axis-name {
     font-family: sans-serif;
-    font-size: 15px;
+    font-size: 1em;
   }
 
 /* specify color, opacity of grid */
 svg .grid .tick {
       stroke: lightgrey;
-      opacity: 0.7;
+      opacity: 0.3;
   }
 
 svg .grid .tick text {
@@ -48,30 +48,10 @@ svg .grid .tick text {
 
   /* should be same as .axis text */
     font-family: sans-serif;
-    font-size: 20px;
+    font-size: 1em;
   }
 
 svg .grid path {
       stroke-width: 0;
       shape-rendering: crispEdges;
-  }
-
-.tooltip {
-    position: absolute;
-    text-align: center;
-    padding: 3px;
-    font: 20px sans-serif;
-    background: powderblue;
-    border: 0px;
-    border-radius: 4px;
-    pointer-events: none;
-  }
-  .box {
-    text-align: center;
-    padding: 3px;
-    font: 20px sans-serif;
-    background: powderblue;
-    border: 0px;
-    border-radius: 4px;
-    pointer-events: none;
   }

@@ -3,55 +3,44 @@
 Script is mostly generic, except for tooltip content, see var tooltipHtml
 
 */
-
-
+function loadPlot(options) {
   //choose id's, plotID same as div acted on
 
-  var plotId = "plot"
+  var plotId = options.plotId;
   var svgId = "#svg" + plotId
-  var buttonId = "residuals-button-1";
-  var buttonContainerId = "residuals-button-container";
-
-
-  //set data folder
-
-  var dataFolder = baseurl + "/assets/data/"
-
-  //set csv url
-
-  var csvUrl = dataFolder + "chomage_2016_2017.csv";
+  var buttonId = options.buttonId;
+  var buttonContainerId = options.buttonContainerId;
+  var csvUrl = options.data;
 
   //choose columns from csv
 
-  var xVar = "2017_1";
-  var yVar = "% Contestataires";
+  var xVar = options.xVar;
+  var yVar = options.yVar;
 
   //axes names
 
-  var xAxisName = "Chômage 1er Trimestre 2017";
-  var yAxisName = "Abstention";
+  var xAxisName = options.xAxisName;
+  var yAxisName = options.yAxisName;
 
   //aliases for tooltip
 
-  var xAlias = "CH";
-  var yAlias = "ABS";
+  var xAlias = options.xAlias;
+  var yAlias = options.yAlias;
 
   //residuals names
 
-  var yResidualsAxisName = "Points Error (PE)";
-  var yResidualsAlias = "PE";
+  var yResidualsAxisName = options.yResidualsAxisName;
+  var yResidualsAlias = options.yResidualsAlias;
 
   //Residuals button names
 
-  var buttonNameResiduals = "Check Residuals";
-  var buttonNameGraph = "Back to Graph";
+  var buttonNameResiduals = options.buttonNameResiduals;
+  var buttonNameGraph = options.buttonNameGraph;
 
   //div dimensions
 
-  var divWidth = parseInt(d3.select("#" + plotId)
-              .style("width"), 10);
-  var divHeight = Math.min(parseInt(d3.select("#" + plotId)
-                    .style("width"), 10), 500);
+  var divWidth = options.width;
+  var divHeight = options.height;
 
   //margin between svg and edges of div, svg dimensions
 
@@ -78,25 +67,6 @@ Script is mostly generic, except for tooltip content, see var tooltipHtml
   var xPaddingLabels = 10;
   var yPaddingLabels = 10;
 
-  //shift tooltip from pointer in px, changed when near right border
-
-  var xTooltipShift = 16;
-  var yTooltipShift = 0;
-
-  //when pointer distance from right side less than tooltipInbound uses Alt
-
-  var tooltipInbound = 100;
-
-  var xTooltipShiftAlt = -50;
-  var yTooltipShiftAlt = 20;
-
-  //tooltip opacity, time to transition on-off
-
-  var tooltipOpacity = 0.9;
-
-  var tooltipTransitionOn = 500;
-  var tooltipTransitionOff = 200;
-
   //choose dots, regression line dimensions
 
   var dotRadius = 4;
@@ -120,29 +90,29 @@ Script is mostly generic, except for tooltip content, see var tooltipHtml
 
   //define scales ranges using dimensions of graph
 
-  var xScale = d3.scale.linear().range([0, graphWidth]);
-  var yScale = d3.scale.linear().range([graphHeight, 0]);
+  var xScale = d3.scaleLinear().range([0, graphWidth]);
+  var yScale = d3.scaleLinear().range([graphHeight, 0]);
 
   //define axes
 
-  var xAxis = d3.svg.axis()
+  var xAxis = d3.axisBottom()
           .scale(xScale)
-          .orient("bottom")
+          //.orient("bottom")
           .ticks(xTicks);
-  var yAxis = d3.svg.axis()
+  var yAxis = d3.axisLeft()
           .scale(yScale)
-          .orient("left")
+          //.orient("left")
           .ticks(yTicks);
 
   //define grid
 
-  var xGrid = d3.svg.axis()
+  var xGrid = d3.axisBottom()
           .scale(xScale)
-          .orient("bottom")
+          //.orient("bottom")
           .ticks(xTicks);
-  var yGrid = d3.svg.axis()
+  var yGrid = d3.axisLeft()
           .scale(yScale)
-          .orient("left")
+          //.orient("left")
           .ticks(yTicks);
 
   //regression line definition and its inverse
@@ -232,11 +202,11 @@ Script is mostly generic, except for tooltip content, see var tooltipHtml
       xLength = d3.max(xData) - Math.min(0, d3.min(xData));
       yLength = d3.max(yData) - Math.min(0, d3.min(yData));
 
-      xMin = Math.min(0, d3.min(xData) - innerPadding.left * xLength);
-      xMax = Math.max(0, d3.max(xData) + innerPadding.right * xLength);
+      xMin = Math.min(d3.min(xData) - innerPadding.left * xLength);
+      xMax = Math.max(d3.max(xData) + innerPadding.right * xLength);
 
-      yMin = Math.min(0, d3.min(yData) - innerPadding.bottom * yLength);
-      yMax = Math.max(0, d3.max(yData) + innerPadding.top * yLength);
+      yMin = Math.min(d3.min(yData) - innerPadding.bottom * yLength);
+      yMax = Math.max(d3.max(yData) + innerPadding.top * yLength);
 
       //set scales domains according to min max dimensions
 
@@ -291,6 +261,7 @@ Script is mostly generic, except for tooltip content, see var tooltipHtml
         .attr("y", (svgHeight))
         .attr("dy", "-0.75em") //adapts distance to bottom in term of font size
         .style("text-anchor", "middle")
+        .style("font-size", "0.75em")
         .text(xAxisName);
 
       svg.append("text")
@@ -301,6 +272,7 @@ Script is mostly generic, except for tooltip content, see var tooltipHtml
         .attr("dy", "1.25em") //adapts distance to left in term of font size
         .attr("x", 0 - (svgHeight - padding.top - padding.bottom) / 2 - padding.top)
         .style("text-anchor", "middle")
+        .style("font-size", "0.75em")
         .text(yAxisName);
 
       //create scatter points, attached to graph
@@ -319,54 +291,30 @@ Script is mostly generic, except for tooltip content, see var tooltipHtml
                   })
                   .attr("r", dotRadius);
 
-        //add tooltip on mouseover and change stroke of selected point
-
+      //highlight point on mouseover TODO: not working !
       scatterPoints.on("mouseover", function(d,i) {
+        d3.select(this).attr("class", "scatter-point-highlight");})
+                    .on("mouseout", function(d,i) {
+        d3.select(this).attr("class","scatter-point");});
 
-          //create tooltip
-
-        d3.select(this).attr("class", "scatter-point-highlight");
-        tooltip.transition()
-          .duration(tooltipTransitionOn)
-          .style("opacity", tooltipOpacity);
+      //add tootlip
+      scatterPoints.each(function(d, i) {
+        var element = d3.select(this);
 
         //filter data for overlapping points
-
         var dataFiltered = dataset.filter(function(d) {return d[xVar] == dataset[i][xVar]
                                   && d[yVar] == dataset[i][yVar];
                   });
 
         //create tooltip html
-
-        var tooltipHtml = xAlias + "=" + xData[i] + ", " + yAlias + "=" + yData[i];
-
+        var tooltipHtml = "";
         dataFiltered.map(function(d,i) {
-                  tooltipHtml = tooltipHtml + "<br/>"
-                    + dataFiltered[i]["Team"]
-                    + " " + dataFiltered[i]["Year"];
+                  tooltipHtml+= xAlias + "="+ Number(dataFiltered[i][xVar]).toFixed(1) + "<br/>"
+                    + yAlias + "=" + Number(dataFiltered[i][yVar]).toFixed(1) + "<br/>";
         });
 
-        // fill and position tooltip, separate case when too close to right side #(instead could check for 'collision'?)
-
-        if (d3.event.pageX<svgWidth-tooltipInbound) {
-          tooltip.html(tooltipHtml)
-            .style("left", (d3.event.pageX + xTooltipShift) + "px")
-            .style("top", (d3.event.pageY + yTooltipShift) + "px");
-        } else {
-          tooltip.html(tooltipHtml)
-            .style("left", (d3.event.pageX + xTooltipShiftAlt) + "px")
-            .style("top", (d3.event.pageY + yTooltipShiftAlt) + "px");
-        }
+        createTooltip(element, tooltip, tooltipHtml);
       });
-
-      //remove tooltip on mouseout
-
-      scatterPoints.on("mouseout", function(d) {
-                  d3.select(this).attr("class","scatter-point");
-                  tooltip.transition()
-                    .duration(tooltipTransitionOff)
-                    .style("opacity", 0);
-              });
 
       //compute regression line data
 
@@ -544,3 +492,4 @@ Script is mostly generic, except for tooltip content, see var tooltipHtml
 							(n * sum_yy - sum_y * sum_y)), 2);
 				return lr;
 			}
+}

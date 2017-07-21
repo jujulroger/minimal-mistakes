@@ -10,14 +10,14 @@ tags: test scatterplot france
 
 test carte de France
 
-<div id="plot"></div>
+<div id="dispersion"></div>
 
 <div id="residuals-button-container"></div>
 
 Pourcentage de votes blancs parmi les inscrits
 
 
-<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
 <script type="text/javascript" src="{{site.baseurl}}/assets/js/jquery-1.12.4.min.js"></script>
 <script>
  var baseurl = '{{site.baseurl}}';

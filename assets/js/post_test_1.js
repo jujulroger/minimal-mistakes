@@ -9,7 +9,7 @@ var height2 = 0.9 * width2;
 
 var map = baseurl + '/assets/maps/france-geojson/departements.geojson'
 var data = baseurl + "/assets/data/chomage_2016_2017.csv"
-var columnHeader = "Ecart_Macron"
+var columnHeader = "Ecart"
 
 var options1 = {
         Id: Id1,
@@ -34,7 +34,7 @@ var options2 = {
         data: data,
         columnHeader: "% Voix/Exp_2",
         tooltipName: "Vote FN",
-        colorbrewerCss: "Greys",
+        colorbrewerCss: "Purples",
         strokeWidth: "0.25px",
         strokeColor: "grey",
         centeredRange: false,
@@ -47,7 +47,7 @@ var options3 = {
         height: height,
         map: map,
         data: data,
-        columnHeader: "Ecart_Macron",
+        columnHeader: "Ecart",
         tooltipName: "Écart",
         colorbrewerCss: "PuOr",
         strokeWidth: "0.25px",
@@ -56,7 +56,26 @@ var options3 = {
         quantiles: 11
     };
 
+var optionsPlot = {
+        width: width,
+        height: height,
+        plotId: "dispersion",
+        buttonId: "residuals-button-1",
+        buttonContainerId: "residuals-button-container",
+        data: data,
+        xVar: "2017_1",
+        yVar: "% Voix/Exp_2",
+        xAxisName: "Chômage 1er Trimestre 2017",
+        yAxisName: "Vote Front National",
+        xAlias: "CH",
+        yAlias: "FN",
+        yResidualsAxisName: "Écart (ÉC)",
+        yResidualsAlias: "ÉC",
+        buttonNameResiduals: "Écarts",
+        buttonNameGraph: "Graphe"
+}
 
 loadMap(options1);
 loadMap(options2);
+loadPlot(optionsPlot);
 loadMap(options3);
