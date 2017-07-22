@@ -1,15 +1,17 @@
 //uses tooltip.css and colorbrew.css
-//Note: Id should be div Id without "#"
+//Note: id should be div Id without "#"
 
 function loadMap(options) {
 
 
-  var Id = options.Id;
+  var id = options.id;
   var width = options.width;
   var height = options.height;
   var map = options.map;
   var data = options.data;
-  var columnHeader = options.columnHeader;
+  var dataColumnHeader = options.dataColumnHeader;
+  var areaIdColumnHeader = options.areaIdColumnHeader;
+  var areaNameColumnHeader = options.areaNameColumnHeader;
   var colorbrewerCss = options.colorbrewerCss;
   var centeredRange = options.centeredRange;
   var quantiles = options.quantiles;
@@ -17,7 +19,7 @@ function loadMap(options) {
   var strokeWidth = options.strokeWidth;
   var strokeColor = options.strokeColor;
 
-  var divId = "#" + Id;
+  var divId = "#" + id;
 
   //projections data
   var center = [2.454071, 46.279229];
@@ -36,7 +38,7 @@ function loadMap(options) {
 
   //svg placement selection
   var svg = d3.select(divId).append("svg")
-      .attr("id", "svg-" + Id)
+      .attr("id", "svg-" + id)
       .attr("width", width)
       .attr("height", height)
       .attr("class", colorbrewerCss);
@@ -56,7 +58,7 @@ function loadMap(options) {
           .data(geojson.features)
           .enter()
           .append("path")
-          .attr('id', function(d) {return "d" + d.properties.code + "-" + Id;})
+          .attr('id', function(d) {return "d" + d.properties.code + "-" + id;})
           .attr("d", path)
           .attr("stroke-width", strokeWidth)
           .attr("stroke", strokeColor);
@@ -67,14 +69,14 @@ function loadMap(options) {
         //create data range, centered at 0 if centeredRange == true
         var min, max;
         if (centeredRange) {
-              var dataMin = Math.abs(d3.min(csv, function(e) { return +e[columnHeader]; }));
-              var dataMax = Math.abs(d3.max(csv, function(e) { return +e[columnHeader]; }));
+              var dataMin = Math.abs(d3.min(csv, function(e) { return +e[dataColumnHeader]; }));
+              var dataMax = Math.abs(d3.max(csv, function(e) { return +e[dataColumnHeader]; }));
               min = - Math.max(dataMin, dataMax);
-              max = Math.max(dataMin, dataMax); 
+              max = Math.max(dataMin, dataMax);
             }
         else {
-          min = d3.min(csv, function(e) { return +e[columnHeader]; });
-          max = d3.max(csv, function(e) { return +e[columnHeader]; });
+          min = d3.min(csv, function(e) { return +e[dataColumnHeader]; });
+          max = d3.max(csv, function(e) { return +e[dataColumnHeader]; });
           }
 
         //need to be reversed for color scale. TODO: does it break anything else ?
@@ -93,7 +95,7 @@ function loadMap(options) {
         //create legend element to the side
         var legend = svg.append('g')
             .attr('transform', 'translate(' + (width - hpad - 25) + ',' + vpad + ')')
-            .attr('id', 'legend-' + Id);
+            .attr('id', 'legend-' + id);
 
         //add rectangles to legend
         legend.selectAll('.colorbar')
@@ -119,15 +121,15 @@ function loadMap(options) {
 
         //color map according to scale and add tooltip
         csv.forEach(function(e,i) {
-          var code = e["code"];
-          var element = d3.select("#d" + code + "-" + Id);
+          var code = e[areaIdColumnHeader];
+          var element = d3.select("#d" + code + "-" + id);
 
               //add colors
-              element.attr("class", function(d) { return "department q" + quantile(+e[columnHeader]) + "-" + quantiles; });
+              element.attr("class", function(d) { return "department q" + quantile(+e[dataColumnHeader]) + "-" + quantiles; });
 
               //create tooltip html
-              tooltipHtml = e["nom"] + "<br>"
-                    + "<b>" + tooltipName + " : </b>" + Number(e[columnHeader]).toFixed(1) + "&nbsp;%<br>"
+              tooltipHtml = e[areaNameColumnHeader] + "<br>"
+                    + "<b>" + tooltipName + " : </b>" + Number(e[dataColumnHeader]).toFixed(1) + "&nbsp;%<br>"
 
               //add tooltip
               createTooltip(element, tooltipDiv, tooltipHtml);

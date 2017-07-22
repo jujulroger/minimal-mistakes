@@ -1,6 +1,9 @@
-var Id1 = "example";
-var Id2 = "example-2";
-var Id3 = "example-3";
+var mapId1 = "example";
+var mapId2 = "example-2";
+var mapId3 = "example-3";
+var plotId = "dispersion";
+var buttonId = "residuals-button-1";
+var buttonContainerId = "residuals-button-container"
 
 var width = $( ".page__inner-wrap" ).width();
 var height = 0.9 * width;
@@ -12,12 +15,14 @@ var data = baseurl + "/assets/data/chomage_2016_2017.csv"
 var columnHeader = "Ecart"
 
 var options1 = {
-        Id: Id1,
+        id: mapId1,
         width: width2,
         height: height2,
         map: map,
         data: data,
-        columnHeader: "2017_1",
+        dataColumnHeader: "2017_1",
+        areaIdColumnHeader: "code",
+        areaNameColumnHeader: "nom",
         tooltipName: "Chômage",
         colorbrewerCss: "Reds",
         strokeWidth: "0.25px",
@@ -27,12 +32,14 @@ var options1 = {
     };
 
 var options2 = {
-        Id: Id2,
+        id: mapId2,
         width: width2,
         height: height2,
-        map: map,
+        map: baseurl + '/assets/maps/france-geojson/departements.geojson',
         data: data,
-        columnHeader: "% Voix/Exp_2",
+        dataColumnHeader: "% Voix/Exp_2",
+        areaIdColumnHeader: "code",
+        areaNameColumnHeader: "nom",
         tooltipName: "Vote FN",
         colorbrewerCss: "Purples",
         strokeWidth: "0.25px",
@@ -42,12 +49,14 @@ var options2 = {
     };
 
 var options3 = {
-        Id: Id3,
+        id: mapId3,
         width: width,
         height: height,
         map: map,
         data: data,
-        columnHeader: "Ecart",
+        dataColumnHeader: "Ecart",
+        areaIdColumnHeader: "code",
+        areaNameColumnHeader: "nom",
         tooltipName: "Écart",
         colorbrewerCss: "PuOr",
         strokeWidth: "0.25px",
@@ -57,11 +66,11 @@ var options3 = {
     };
 
 var optionsPlot = {
+        plotId: plotId,
+        buttonId: buttonId,
+        buttonContainerId: buttonContainerId,
         width: width,
         height: height,
-        plotId: "dispersion",
-        buttonId: "residuals-button-1",
-        buttonContainerId: "residuals-button-container",
         data: data,
         xVar: "2017_1",
         yVar: "% Voix/Exp_2",
